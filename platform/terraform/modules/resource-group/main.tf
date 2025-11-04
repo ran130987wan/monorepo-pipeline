@@ -14,6 +14,6 @@ resource "azurerm_management_lock" "rg_lock" {
 
   name               = "${each.value.name}-lock"
   scope              = azurerm_resource_group.this[each.key].id
-  lock_level        = "CanNotDelete"
-  notes             = "Resource group lock enabled via Terraform."
+  lock_level         = "CanNotDelete"
+  notes              = "Resource group lock enabled via Terraform."
 }

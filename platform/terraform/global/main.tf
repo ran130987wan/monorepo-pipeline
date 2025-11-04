@@ -10,9 +10,10 @@ locals {
 }
 
 module "resource_groups" {
-  source          = "git::https://github.com/Veeam-VDC/vdc-admin-portal-utils.git//terraform/modules/resource-group?ref=resource-group/v1.0.0"
-  resource_groups = local.resource_groups
+  source          = "../modules/resource-group"
+  resource_groups = locals.resource_groups
 }
+/*
 module "vnet" {
   source     = "git::https://github.com/Veeam-VDC/vdc-admin-portal-utils.git//terraform/modules/vnet?ref=vnet/v1.0.0"
   vnet       = var.vnet
@@ -24,13 +25,15 @@ module "subnet" {
   subnets    = var.subnets
   depends_on = [module.vnet]
 }
+*/
 
 module "managed_identity" {
-  source           = "git::https://github.com/Veeam-VDC/vdc-admin-portal-utils.git//terraform/modules/managed-identity?ref=managed-identity/v1.0.0"
+  source           = "../modules/managed-identity"
   managed_identity = var.managed_identity
   depends_on       = [module.resource_groups]
 }
 
+/*
 module "nat_gateway" {
   source      = "git::https://github.com/Veeam-VDC/vdc-admin-portal-utils.git//terraform/modules/nat-gateway?ref=nat-gw/v1.0.0"
   nat_gateway = var.nat_gateway
@@ -104,3 +107,4 @@ module "swa" {
   staticwebapp = var.staticwebapp
   depends_on   = [module.resource_groups]
 }
+*/

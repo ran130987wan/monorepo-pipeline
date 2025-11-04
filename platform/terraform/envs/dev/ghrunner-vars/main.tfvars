@@ -6,13 +6,13 @@ global_config = {
   region_code    = "cus"
   tags = {
     product     = "vdc-Entra-Admin"
-    Environment = "dev"
-    Source      = "terraform-gh-runner"
+    environment = "dev"
+    source      = "terraform-gh-runner"
   }
 }
 
 aks_node_config = {
-  kubernetes_cluster_id = "/subscriptions/c8d528f7-bee5-4164-bcd1-f84e9d444dcc/resourceGroups/vdc-entra-cus-gha-rg-dev/providers/Microsoft.ContainerService/managedClusters/vdc-entra-cus-gha-aks-dev"
+  kubernetes_cluster_id = "/subscriptions/f107fc08-072b-4963-8f72-e3550697e67f/resourceGroups/vdc-entra-cus-gha-rg-dev/providers/Microsoft.ContainerService/managedClusters/vdc-entra-cus-gha-aks-dev"
   node_pool_name        = "entradmpool"
   vm_size               = "Standard_B2ms"
   enable_auto_scaling   = true
@@ -20,7 +20,7 @@ aks_node_config = {
   min_count             = 1
   max_count             = 2
   mode                  = "User"
-  vnet_subnet_id        = "/subscriptions/c8d528f7-bee5-4164-bcd1-f84e9d444dcc/resourceGroups/vdc-entra-cus-gha-rg-dev/providers/Microsoft.Network/virtualNetworks/vdc-entra-cus-gha-vnet-dev/subnets/gha_runner_subnet"
+  vnet_subnet_id        = "/subscriptions/f107fc08-072b-4963-8f72-e3550697e67f/resourceGroups/vdc-entra-cus-gha-rg-dev/providers/Microsoft.Network/virtualNetworks/vdc-entra-cus-gha-vnet-dev/subnets/gha_runner_subnet"
   availability_zones    = ["3"]
   node_labels = {
     workload = "entraadmin-runner"
@@ -33,8 +33,8 @@ aks_node_config = {
   orchestrator_version = "1.32.7"
   tags = {
     product     = "vdc-Entra-Admin"
-    Environment = "dev"
-    Source      = "terraform-gh-runner"
+    environment = "dev"
+    source      = "terraform-gh-runner"
   }
 }
 
@@ -43,7 +43,7 @@ federated_identity_credential = {
   name                = "github-dev-entraadmin"
   issuer              = "https://token.actions.githubusercontent.com",
   resource_group_name = "MC_vdc-entra-cus-gha-rg-dev_vdc-entra-cus-gha-aks-dev_centralus",
-  parent_id           = "/subscriptions/c8d528f7-bee5-4164-bcd1-f84e9d444dcc/resourceGroups/MC_vdc-entra-cus-gha-rg-dev_vdc-entra-cus-gha-aks-dev_centralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/vdc-entra-cus-gha-aks-dev-agentpool",
+  parent_id           = "/subscriptions/f107fc08-072b-4963-8f72-e3550697e67f/resourceGroups/MC_vdc-entra-cus-gha-rg-dev_vdc-entra-cus-gha-aks-dev_centralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/vdc-entra-cus-gha-aks-dev-agentpool",
   subject             = "repo:Veeam-VDC/vdc-entra-admin-portal:environment:dev",
   audiences           = ["api://AzureADTokenExchange"]
 }

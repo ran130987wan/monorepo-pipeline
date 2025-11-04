@@ -6,8 +6,8 @@ global_config = {
   region_code    = "cus"
   tags = {
     product     = "vdc-Entra-Admin"
-    Environment = "dev"
-    Source      = "terraform-gh-runner"
+    environment = "dev"
+    source      = "terraform-gh-runner"
   }
 }
 

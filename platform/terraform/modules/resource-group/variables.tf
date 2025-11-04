@@ -1,5 +1,5 @@
 variable "resource_groups" {
-  description = "Lis of coonfiguration objects for the Resource Group module."
+  description = "List of configuration objects for the Resource Group module."
   type = list(object({
     name        = string
     location    = string

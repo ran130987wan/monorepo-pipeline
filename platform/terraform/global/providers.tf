@@ -9,7 +9,7 @@ terraform {
       version = "~> 3.3"
     }
   }
-  required_version = "= 1.12.2" # Ensure your Terraform version is compatible
+  required_version = ">= 1.12.0" # Ensure your Terraform version is compatible
 }
 provider "azurerm" {
   features {
@@ -18,14 +18,14 @@ provider "azurerm" {
     }
   }
   resource_provider_registrations = "none"
-  subscription_id                 = "e3bc3d5d-8026-43f9-b540-98eed3a27817"
+  subscription_id                 = "f107fc08-072b-4963-8f72-e3550697e67f"
 }
 
 provider "azurerm" {
   features {}
   alias                           = "platform"
   resource_provider_registrations = "none"
-  subscription_id                 = "c8d528f7-bee5-4164-bcd1-f84e9d444dcc"
+  subscription_id                 = "f107fc08-072b-4963-8f72-e3550697e67f"
 }
 
 # provider "azurerm" {
@@ -44,14 +44,15 @@ provider "azurerm" {
 #   }
 # }
 
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "vdc-entra-admin-cus-bootstrap-rg-dev" # The resource group name
-    storage_account_name = "vdcentraadmsacusdevtfbe"              # The name of your Storage Account
-    container_name       = "tfstateentraadmin"                    # The container where the state file will be stored
-    key                  = "dev-global.terraform.tfstate"         # The name of the state file
-  }
-}
+# Temporarily using local backend for testing
+# terraform {
+#   backend "azurerm" {
+#     resource_group_name  = "vdc-entra-admin-cus-bootstrap-rg-dev" # The resource group name
+#     storage_account_name = "vdcentraadmsacusdevtfbe"              # The name of your Storage Account
+#     container_name       = "tfstateentraadmin"                    # The container where the state file will be stored
+#     key                  = "dev-global.terraform.tfstate"         # The name of the state file
+#   }
+# }
 
 # data "azurerm_subscription" "env" {
 #   provider = azurerm.dev
