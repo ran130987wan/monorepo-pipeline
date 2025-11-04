@@ -1,17 +1,6 @@
-locals {
-  resource_groups = [
-    for rg in locals.resource_groups_map : {
-      name     = "${var.global_config.compact_prefix}-${rg.name}-rg-${var.global_config.environment}"
-      location = var.global_config.location
-      locks    = locals.enable_resource_group_lock
-      tags     = var.global_config.tags
-    }
-  ]
-}
-
 module "resource_groups" {
   source          = "../modules/resource-group"
-  resource_groups = locals.resource_groups
+  resource_groups = local.resource_groups
 }
 /*
 module "vnet" {

@@ -5,5 +5,5 @@ output "resource_group_ids" {
 
 output "resource_group_names" {
     description = "Names of the created resource groups."
-    value       = { for rg in azurerm_resource_group.this : name => rg.name }
+    value       = { for name, rg in azurerm_resource_group.this : name => rg.name }
 }
