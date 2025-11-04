@@ -334,3 +334,23 @@ variable "aks_node_config" {
     tags                  = map(string)
   })
 }
+
+variable "federated_identity_credential" {
+  description = "Configuration for the federated identity credential."
+  type = object({
+    name                = string
+    issuer              = string
+    resource_group_name = string
+    parent_id           = string
+    subject             = string
+    audience            = list(string)
+  })
+  default = {
+    name                = ""
+    issuer              = ""
+    resource_group_name = ""
+    parent_id           = ""
+    subject             = ""
+    audience            = []
+  }
+}
