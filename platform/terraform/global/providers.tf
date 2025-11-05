@@ -10,6 +10,11 @@ terraform {
     }
   }
   required_version = ">= 1.12.0" # Ensure your Terraform version is compatible
+  
+  backend "azurerm" {
+    # Configuration provided via backend-config.tfbackend file
+    # Run: terraform init -backend-config=backend-config.tfbackend -migrate-state
+  }
 }
 provider "azurerm" {
   features {

@@ -16,6 +16,10 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
+# Ignore backend configuration files (may contain sensitive storage account info)
+backend-config.tfbackend
+*.tfbackend
+
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
