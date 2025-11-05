@@ -2,6 +2,12 @@
 
 This directory contains Terraform configurations for managing Azure infrastructure across multiple environments.
 
+## 📚 Documentation
+
+- **[USAGE_GUIDE.md](USAGE_GUIDE.md)** - Complete step-by-step execution guide for users
+- **[CODE_GUIDE.md](CODE_GUIDE.md)** - Detailed code structure and implementation guide
+- **[BACKEND.md](global/BACKEND.md)** - Azure backend configuration and management
+
 ## Directory Structure
 
 ```
