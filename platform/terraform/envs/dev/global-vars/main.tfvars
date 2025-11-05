@@ -15,8 +15,8 @@ global_config = {
 }
 
 managed_identity = {
-  umi_name            = "vdccpadmin-mi-dev"
-  resource_group_name = "vdccpadmin-integration-rg-dev"
+  umi_name            = "vdccpadm-mi-dev"
+  resource_group_name = "vdccpadm-integration-rg-dev"
   location            = "centralus"
   tags = {
     product     = "vdc-cp-admin"
