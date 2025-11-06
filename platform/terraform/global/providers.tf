@@ -14,7 +14,7 @@ terraform {
   # Configure remote state backend in Azure Storage
   backend "azurerm" {
     resource_group_name  = "vdc-cp-admin-cus-bootstrap-rg-dev"
-    storage_account_name = "vdccpadmsacusdevtfbe"
+    storage_account_name = "vdccpadmsacusdevtfbe1"
     container_name       = "tfstatecpadmin"
     key                  = "dev-global.terraform.tfstate"
   }
