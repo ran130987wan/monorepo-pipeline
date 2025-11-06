@@ -13,14 +13,3 @@ global_config = {
     source      = "terraform"
   }
 }
-
-managed_identity = {
-  umi_name            = "vdccpadm-mi-dev"
-  resource_group_name = "vdccpadm-integration-rg-dev"
-  location            = "centralus"
-  tags = {
-    product     = "vdc-cp-admin"
-    environment = "dev"
-    source      = "terraform"
-  }
-}

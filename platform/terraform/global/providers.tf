@@ -10,12 +10,8 @@ terraform {
     }
   }
   required_version = ">= 1.12.0" # Ensure your Terraform version is compatible
-  
-  backend "azurerm" {
-    # Configuration provided via backend-config.tfbackend file
-    # Run: terraform init -backend-config=backend-config.tfbackend -migrate-state
-  }
 }
+
 provider "azurerm" {
   features {
     resource_group {
@@ -26,46 +22,14 @@ provider "azurerm" {
   subscription_id                 = "f107fc08-072b-4963-8f72-e3550697e67f"
 }
 
-provider "azurerm" {
-  features {}
-  alias                           = "platform"
-  resource_provider_registrations = "none"
-  subscription_id                 = "f107fc08-072b-4963-8f72-e3550697e67f"
+# Configure remote state backend in Azure Storage
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "vdc-cp-admin-cus-bootstrap-rg-dev"
+    storage_account_name = "vdccpadmsacusdevtfbe"
+    container_name       = "tfstatecpadmin"
+    key                  = "dev-global.terraform.tfstate"
+  }
 }
 
-# provider "azurerm" {
-#   features {}
-#   alias                           = "platform"
-#   resource_provider_registrations = "none"
-#   subscription_id                 = "#{PLATFORM-SUBSCRIPTION-ID}#"
-# }
 
-# terraform {
-#   backend "azurerm" {
-#     resource_group_name  = "#{TF_BACKEND_AZ_STORAGE_ACCOUNT_RG_NAME}#" # The resource group name 
-#     storage_account_name = "#{TF_BACKEND_AZ_STORAGE_ACCOUNT_NAME}#"    # The name of your Storage Account
-#     container_name       = "#{TF_BACKEND_AZ_STORAGE_CONTAINER_NAME}#"  # The container where the state file will be stored
-#     key                  = "#{TF_BACKEND_AZ_STORAGE_BLOB_KEY}#"        # The name of the state file
-#   }
-# }
-
-# Temporarily using local backend for testing
-# terraform {
-#   backend "azurerm" {
-#     resource_group_name  = "vdc-entra-admin-cus-bootstrap-rg-dev" # The resource group name
-#     storage_account_name = "vdcentraadmsacusdevtfbe"              # The name of your Storage Account
-#     container_name       = "tfstateentraadmin"                    # The container where the state file will be stored
-#     key                  = "dev-global.terraform.tfstate"         # The name of the state file
-#   }
-# }
-
-# data "azurerm_subscription" "env" {
-#   provider = azurerm.dev
-# }
-
-# provider "azurerm" {
-#   features {}
-#   alias                           = "dev"
-#   resource_provider_registrations = "none"
-#   subscription_id                 = "e3bc3d5d-8026-43f9-b540-98eed3a27817"
-# }

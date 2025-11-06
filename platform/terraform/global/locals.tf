@@ -1,4 +1,5 @@
 locals {
+  # Define resource group types for different workloads
   resource_groups_map = {
     container = {
       name = "container"
@@ -33,15 +34,10 @@ locals {
       type = "integration"
     }
   }
-  region_code                = var.azure_region_map[var.global_config.location]
+  
+  # Get region code from mapping
+  region_code = var.azure_region_map[var.global_config.location]
+  
+  # Enable locks for production and staging environments
   enable_resource_group_lock = var.global_config.environment == "prod" || var.global_config.environment == "stage" ? true : false
-
-  resource_groups = [
-    for rg in local.resource_groups_map : {
-      name     = "${var.global_config.compact_prefix}-${rg.name}-rg-${var.global_config.environment}"
-      location = var.global_config.location
-      locks    = local.enable_resource_group_lock
-      tags     = var.global_config.tags
-    }
-  ]
 }

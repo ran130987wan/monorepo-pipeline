@@ -1,4 +1,5 @@
 variable "global_config" {
+  description = "Global configuration for resource naming and tagging"
   type = object({
     prefix         = string
     compact_prefix = string
@@ -10,7 +11,8 @@ variable "global_config" {
 }
 
 variable "azure_region_map" {
-  type = map(string)
+  description = "Mapping of Azure region names to short codes"
+  type        = map(string)
   default = {
     "eastus"             = "eus"
     "eastus2"            = "eus2"
@@ -43,14 +45,4 @@ variable "azure_region_map" {
     "japanwest"          = "jpw"
     "swedencentral"      = "swc"
   }
-}
-
-variable "managed_identity" {
-  description = "Combined configuration for the managed identity module."
-  type = object({
-    umi_name            = string
-    location            = string
-    resource_group_name = string
-    tags                = optional(map(string), {})
-  })
 }
