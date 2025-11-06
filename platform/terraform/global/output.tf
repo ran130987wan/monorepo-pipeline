@@ -1,16 +1,25 @@
-# Output all resource group IDs
+# ============================================================================
+# Output Values
+# ============================================================================
+# Exports resource group IDs and names for use in other Terraform modules
+# Outputs can be referenced by dependent configurations
+# ============================================================================
+
+# Complete map of all resource group IDs - useful for iteration
 output "resource_group_ids" {
   description = "Map of resource group names to their Azure resource IDs"
   value       = module.resource_groups.resource_group_ids
 }
 
-# Output all resource group names
+# Complete map of all resource group names - useful for lookups
 output "resource_group_names" {
   description = "Map of resource group names to their display names"
   value       = module.resource_groups.resource_group_names
 }
 
-# Output specific resource groups for easy reference in other modules
+# Individual resource group outputs for direct reference in other modules
+# Format: /subscriptions/{subscription-id}/resourceGroups/{rg-name}
+
 output "container_rg_id" {
   description = "Resource ID of the container resource group"
   value       = module.resource_groups.resource_group_ids["${var.global_config.compact_prefix}-container-rg-${var.global_config.environment}"]

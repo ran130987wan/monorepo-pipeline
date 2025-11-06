@@ -1,47 +1,57 @@
+# ============================================================================
+# Local Variables
+# ============================================================================
+# Computed values and transformations used throughout the configuration
+# Maps workload types to resource groups and applies naming standards
+# ============================================================================
+
 locals {
-  # Define resource group types for different workloads
+  # Master map of resource group types for workload separation
+  # Each key represents a logical grouping of Azure resources
   resource_groups_map = {
     container = {
-      name = "container"
+      name = "container"      # Container services (AKS, ACI)
       type = "container"
     },
     web = {
-      name = "web"
+      name = "web"            # Web apps and frontend services
       type = "web"
     },
     security = {
-      name = "security"
+      name = "security"       # Security tools (Key Vault, Sentinel)
       type = "security"
     },
     data = {
-      name = "data"
+      name = "data"           # Data services (SQL, Cosmos, Storage)
       type = "data"
     },
     monitoring = {
-      name = "monitoring"
+      name = "monitoring"     # Observability (Log Analytics, App Insights)
       type = "monitoring"
     },
     network = {
-      name = "network"
+      name = "network"        # Networking (VNet, NSG, Firewall)
       type = "network"
     },
     platform = {
-      name = "platform"
+      name = "platform"       # Platform services (API Management, Service Bus)
       type = "platform"
     },
     integration = {
-      name = "integration"
+      name = "integration"    # Integration services (Logic Apps, Functions)
       type = "integration"
     }
   }
 
-  # Get region code from mapping
+  # Lookup region short code from full region name
   region_code = var.azure_region_map[var.global_config.location]
 
-  # Enable locks for production and staging environments
+  # Conditional lock - enabled only for prod/stage to prevent accidental deletion
   enable_resource_group_lock = var.global_config.environment == "prod" || var.global_config.environment == "stage" ? true : false
 
-  # Transform the resource groups map into the format expected by the module
+  # Transform map to list with standardized naming pattern
+  # Pattern: {compact_prefix}-{workload}-rg-{environment}
+  # Example: vdccpadm-container-rg-dev
   resource_groups = [
     for rg in local.resource_groups_map : {
       name     = "${var.global_config.compact_prefix}-${rg.name}-rg-${var.global_config.environment}"
