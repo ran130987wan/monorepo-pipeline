@@ -34,10 +34,20 @@ locals {
       type = "integration"
     }
   }
-  
+
   # Get region code from mapping
   region_code = var.azure_region_map[var.global_config.location]
-  
+
   # Enable locks for production and staging environments
   enable_resource_group_lock = var.global_config.environment == "prod" || var.global_config.environment == "stage" ? true : false
+
+  # Transform the resource groups map into the format expected by the module
+  resource_groups = [
+    for rg in local.resource_groups_map : {
+      name     = "${var.global_config.compact_prefix}-${rg.name}-rg-${var.global_config.environment}"
+      location = var.global_config.location
+      locks    = local.enable_resource_group_lock
+      tags     = var.global_config.tags
+    }
+  ]
 }

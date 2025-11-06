@@ -10,6 +10,14 @@ terraform {
     }
   }
   required_version = ">= 1.12.0" # Ensure your Terraform version is compatible
+
+  # Configure remote state backend in Azure Storage
+  backend "azurerm" {
+    resource_group_name  = "vdc-cp-admin-cus-bootstrap-rg-dev"
+    storage_account_name = "vdccpadmsacusdevtfbe"
+    container_name       = "tfstatecpadmin"
+    key                  = "dev-global.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -22,14 +30,5 @@ provider "azurerm" {
   subscription_id                 = "f107fc08-072b-4963-8f72-e3550697e67f"
 }
 
-# Configure remote state backend in Azure Storage
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "vdc-cp-admin-cus-bootstrap-rg-dev"
-    storage_account_name = "vdccpadmsacusdevtfbe"
-    container_name       = "tfstatecpadmin"
-    key                  = "dev-global.terraform.tfstate"
-  }
-}
 
 
